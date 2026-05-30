@@ -1670,7 +1670,7 @@ void DisplayBase::CommitThread() {
     // Wait for client thread to signal. Handle spurious interrupts.
     if (!(disp_mutex_.worker_cv.wait_until(disp_mutex_.worker_mutex, timeout_at,
                                            [this] { return (disp_mutex_.worker_busy); }))) {
-      DLOGI("Received %s Timeout, panel: %s, timeout: %" PRId64 " us",
+      DLOGI("Received %s Timeout, panel: %s, timeout: %lld us",
             (self_refresh_state ? "Self-Refresh Threshold" : "Idle"),
             client_ctx_.hw_panel_info.mode == kModeVideo ? "video" : "cmd", wait_duration);
 

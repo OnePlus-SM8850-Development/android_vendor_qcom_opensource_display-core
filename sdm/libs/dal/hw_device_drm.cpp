@@ -1784,7 +1784,7 @@ void HWDeviceDRM::SetupAtomic(Fence::ScopedRef &scoped_ref, HWLayersInfo *hw_lay
       DestScaleInfoMap &dest_scale_info_map = hw_layers_info->dest_scale_info_map;
 
       if (dest_scale_info_map.size() && hw_layers_info->left_frame_roi.size() != 1) {
-        DLOGE("left_frame_roi size %d, only 1 ROI supported in PU+DS case",
+        DLOGE("left_frame_roi size %zu, only 1 ROI supported in PU+DS case",
               hw_layers_info->left_frame_roi.size());
       }
 
@@ -3886,7 +3886,7 @@ bool HWDeviceDRM::ConfigureDNSCforCwb(HWLayersInfo *hw_layers_info) {
     return false;
   } else {
     auto wb_index = std::distance(dnsc_associated_wb_ids_.begin(), it);
-    DLOGV_IF(kTagDriverConfig, "WB%u is using DNSC_blur for CWB at display %d-%d", wb_index,
+    DLOGV_IF(kTagDriverConfig, "WB%zu is using DNSC_blur for CWB at display %d-%d", wb_index,
              display_id_, disp_type_);
   }
   ConfigureDNSCbase(hw_layers_info, conn_id, cwb_config_[core_id_].dnsc_cfg);
@@ -4173,7 +4173,7 @@ DisplayError HWDeviceDRM::GetFeatureSupportStatus(const HWFeature feature, uint3
       if (idx < connector_info_.modes[current_mode_index_].allowed_mode_switch.size()) {
         *status = connector_info_.modes[current_mode_index_].allowed_mode_switch[idx];
       } else {
-        DLOGW("Invalid index %u for allowed_mode_switch size[%d] current_mode_idx[%d]", idx,
+        DLOGW("Invalid index %u for allowed_mode_switch size[%zu] current_mode_idx[%d]", idx,
               connector_info_.modes[current_mode_index_].allowed_mode_switch.size(),
               current_mode_index_);
         error = kErrorParameters;

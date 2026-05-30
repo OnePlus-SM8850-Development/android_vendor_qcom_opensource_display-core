@@ -224,7 +224,7 @@ void DRMPanelFeatureMgr::Deinit() {
   int ret = 0;
   for (int i = kDRMPanelFeatureDsppIndex; i < kDRMPanelFeatureMax; i++) {
     DRMPanelFeatureID prop_id = static_cast<DRMPanelFeatureID>(i);
-    DRM_LOGD("size of queue %d, feature %d", drm_prop_blob_ids_cache_[prop_id].size(), prop_id);
+    DRM_LOGD("size of queue %zu, feature %d", drm_prop_blob_ids_cache_[prop_id].size(), prop_id);
     for (; drm_prop_blob_ids_cache_[prop_id].size();
          drm_prop_blob_ids_cache_[prop_id].pop_front()) {
       uint32_t blob_id = drm_prop_blob_ids_cache_[prop_id].front();
@@ -725,7 +725,7 @@ void DRMPanelFeatureMgr::ApplyDirtyFeature(drmModeAtomicReq *req, const DRMDispl
     }
 
     if (drm_prop_blob_ids_cache_[info.prop_id].size() > 2) {
-      DRM_LOGE("invalid blob count %d, for feature = %d, clearing stale blobs",
+      DRM_LOGE("invalid blob count %zu, for feature = %d, clearing stale blobs",
                drm_prop_blob_ids_cache_[info.prop_id].size(), info.prop_id);
       for (; drm_prop_blob_ids_cache_[info.prop_id].size();
            drm_prop_blob_ids_cache_[info.prop_id].pop_front()) {
@@ -747,7 +747,7 @@ void DRMPanelFeatureMgr::ApplyDirtyFeature(drmModeAtomicReq *req, const DRMDispl
       drm_prop_blob_ids_cache_[info.prop_id].pop_front();
     }
     drm_prop_blob_ids_cache_[info.prop_id].push_back(blob_id);
-    DRM_LOGD("size of queue %d, property %d", drm_prop_blob_ids_cache_[info.prop_id].size(),
+    DRM_LOGD("size of queue %zu, property %d", drm_prop_blob_ids_cache_[info.prop_id].size(),
              info.prop_id);
 
     value = blob_id;

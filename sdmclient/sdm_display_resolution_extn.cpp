@@ -137,7 +137,7 @@ DisplayError SDMDisplayResolutionExtn::GetExtendedDisplayResolutions(uint32_t pa
                        (UINT32(res_x) % 2 == 0) && (UINT32(res_y) % 2 == 0) &&
                        (((p_width / res_x) == 2) && ((p_height / res_y) == 1))) {
               // Allow a virtual mode x_res = p_width / 2 and y_res = p_height(RGBA Split Feature
-              DLOGI("Mode for RGBA Split Feature: x_res = %d y_res = %d panel w = %d panel h = %d",
+              DLOGI("Mode for RGBA Split Feature: x_res = %f y_res = %f panel w = %d panel h = %d",
                     res_x, res_y, p_width, p_height);
               extended_disp_res->push_back(std::make_pair(UINT32(res_x), UINT32(res_y)));
             } else if (res_overlap && (floor(res_x) == res_x) && (floor(res_y) == res_y) &&

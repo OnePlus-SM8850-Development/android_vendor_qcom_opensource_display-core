@@ -1121,7 +1121,7 @@ DisplayError SDMLayer::SetLayerPrivacyRegions(const std::vector<PrivacyRegion> &
   DTRACE_SCOPED();
   bool updated = false;
   if (privacy_regions.size() != layer_->privacy_regions.size()) {
-    DLOGV_IF(kTagClient, "Layer's %d: privacy regions updated (cur %u new %u)", id_,
+    DLOGV_IF(kTagClient, "Layer's %ld: privacy regions updated (cur %zu new %zu)", id_,
              layer_->privacy_regions.size(), privacy_regions.size());
     updated = true;
   }
@@ -1132,7 +1132,7 @@ DisplayError SDMLayer::SetLayerPrivacyRegions(const std::vector<PrivacyRegion> &
       PrivacyRegion new_region = privacy_regions[i];
 
       if (cur_region != new_region) {
-        DLOGV_IF(kTagClient, "Layer's %d: privacy regions updated - index %d", id_, i);
+        DLOGV_IF(kTagClient, "Layer's %ld: privacy regions updated - index %zu", id_, i);
         updated = true;
         break;
       }
@@ -1148,7 +1148,7 @@ DisplayError SDMLayer::SetLayerPrivacyRegions(const std::vector<PrivacyRegion> &
       if (Contains(dst_rect_, layer_rect)) {
         layer_->privacy_regions.push_back(region);
       } else {
-        DLOGV_IF(kTagClient, "Layer %d: region %f %f %f %f is not within %f %f %f %f", id_,
+        DLOGV_IF(kTagClient, "Layer %ld: region %f %f %f %f is not within %f %f %f %f", id_,
                  layer_rect.left, layer_rect.top, layer_rect.right, layer_rect.bottom,
                  dst_rect_.left, dst_rect_.top, dst_rect_.right, dst_rect_.bottom);
       }
@@ -1173,7 +1173,7 @@ bool SDMLayer::IsPrivacyRegionUpdated() {
   }
 
   if (privacy_region_state_ != kRegionActive && layer_->privacy_regions.size() > 0) {
-    DLOGV_IF(kTagClient, "Reset layer's %d privacy regions", id_);
+    DLOGV_IF(kTagClient, "Reset layer's %ld privacy regions", id_);
     privacy_region_state_ = kRegionUpdate;
     layer_->privacy_regions.clear();
     return true;

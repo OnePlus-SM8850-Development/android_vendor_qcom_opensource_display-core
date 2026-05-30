@@ -167,13 +167,13 @@ void PrivacyRegionManager::ApplyCollapsing(const DispLayerStack *disp_layer_stac
                   static_cast<int>(layer->dst_rect.bottom)}});
 
       DLOGI_IF(kTagDisplay,
-               "Layer's %u %s privacy regions %d exceeds limit [radius: %f rect:%d %d %d %d]",
+               "Layer's %lu %s privacy regions %zu exceeds limit [radius: %f rect:%f %f %f %f]",
                layer->layer_id, layer->layer_name.c_str(), layer->privacy_regions.size(), radius,
                layer->dst_rect.left, layer->dst_rect.top, layer->dst_rect.right,
                layer->dst_rect.bottom);
     } else {
       for (auto region : layer->privacy_regions) {
-        DLOGI_IF(kTagDisplay, "Layer %u %s [radius:%f rect:%d %d %d %d]", layer->layer_id,
+        DLOGI_IF(kTagDisplay, "Layer %lu %s [radius:%f rect:%d %d %d %d]", layer->layer_id,
                  layer->layer_name.c_str(), region.corner_radius, region.rect.left, region.rect.top,
                  region.rect.right, region.rect.bottom);
         consolidated_regions.push_back(region);
@@ -186,7 +186,7 @@ void PrivacyRegionManager::ApplyCollapsing(const DispLayerStack *disp_layer_stac
     consolidated_regions.push_back(
         PrivacyRegion{0.0f, SDMRect{0, 0, INT(mixer_res.x_pixels), INT(mixer_res.y_pixels)}});
 
-    DLOGI_IF(kTagDisplay, "Frame's privacy regions %d exceeds limit [radius:%f rect:%d %d %d %d]",
+    DLOGI_IF(kTagDisplay, "Frame's privacy regions %zu exceeds limit [radius:%f rect:%d %d %d %d]",
              consolidated_regions.size(), 0.0f, 0, 0, INT(mixer_res.x_pixels),
              INT(mixer_res.y_pixels));
   }

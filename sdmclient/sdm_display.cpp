@@ -2232,7 +2232,7 @@ void SDMDisplay::DumpInputBuffers() {
     Fence::Wait(layer->input_buffer.acquire_fence);
 
     if (!handle) {
-      DLOGW("Buffer handle is detected as null for layer: %s(%" PRIu64 ") out of %" PRIu32 " "
+      DLOGW("Buffer handle is detected as null for layer: %s(%" PRIu64 ") out of %" PRIu64 " "
             "layers with layer "
             "flag value: %u",
             layer->layer_name.c_str(), layer->layer_id,
@@ -2240,7 +2240,7 @@ void SDMDisplay::DumpInputBuffers() {
       continue;
     }
 
-    DLOGI("Dump layer[%" PRIu32 "] of %" PRIu32 " handle %p", i, layer_stack_.layers.size(),
+    DLOGI("Dump layer[%" PRIu32 "] of %" PRIu64 " handle %p", i, layer_stack_.layers.size(),
           handle);
 
     // start mapbuffer func
@@ -4397,7 +4397,7 @@ DisplayError SDMDisplay::SetRGBASplit(int32_t split_enable) {
 
   DisplayError error = display_intf_->SetRGBASplit(split_enable);
   DLOGI("Feature %s on display : %" PRId64 " %d-%d", split_enable ? "enabled" : "disabled", id_,
-        sdm_id_, type_, split_enable);
+        sdm_id_, type_);
 
   return error;
 }
@@ -4407,7 +4407,7 @@ void SDMDisplay::SetPrivacyRegionsData(uint32_t layer_id, float corner_radius,
                                        const std::vector<PrivacyRegion> &privacy_regions) {
   const auto map_layer = sdm_layer_stack_->layer_map_.find(layer_id);
   if (map_layer == sdm_layer_stack_->layer_map_.end()) {
-    DLOGW("Display [%" PRIu64 "]-[%" PRIu64 "] SetPrivacyRegions: Failed to find layer %d!", id_,
+    DLOGW("Display [%" PRIu64 "]-[%u] SetPrivacyRegions: Failed to find layer %d!", id_,
           type_, layer_id);
     return;
   }
@@ -4424,7 +4424,7 @@ DisplayError SDMDisplay::ClearBuffersMappedToLayer(LayerId layer_id,
   // Get BufferID from SnapHandle
   uint64_t buffer_id = 0;
   if (layerBuffer == nullptr) {
-    DLOGW("Layer Buffer(SnapHandle) is NULL for layer_id %d on display : %d-%d", layer_id, sdm_id_,
+    DLOGW("Layer Buffer(SnapHandle) is NULL for layer_id %ld on display : %d-%d", layer_id, sdm_id_,
           type_);
     return kErrorParameters;
   }
@@ -4438,7 +4438,7 @@ DisplayError SDMDisplay::ClearBuffersMappedToLayer(LayerId layer_id,
       }
       auto it = layer->buffer_map->buffer_map.find(buffer_id);
       if (it != layer->buffer_map->buffer_map.end()) {
-        DLOGV_IF(kTagClient, "Buffer_id %d exists in fbid buffermap of layer - %d.Erasing it.",
+        DLOGV_IF(kTagClient, "Buffer_id %lu exists in fbid buffermap of layer - %ld.Erasing it.",
                  buffer_id, layer_id);
         layer->buffer_map->buffer_map.erase(it);
       }

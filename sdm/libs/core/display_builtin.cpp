@@ -755,7 +755,7 @@ void DisplayBuiltIn::UpdateQsyncConfig() {
   disp_layer_stack_->stack_info.common_info.hw_avr_info.mode = GetAvrMode(mode);
   disp_layer_stack_->stack_info.common_info.hw_avr_info.step_enabled = avr_step_enabled_;
 
-  DLOGV_IF(kTagDisplay, "display %d-%d update: %" PRIu64 " mode: %d AVR Step state: %d", display_id_,
+  DLOGV_IF(kTagDisplay, "display %d-%u update: %llu mode: %d AVR Step state: %d", display_id_,
            display_type_, disp_layer_stack_->stack_info.common_info.hw_avr_info.update.to_ullong(), mode,
            avr_step_enabled_);
 
@@ -5180,7 +5180,7 @@ DisplayError DisplayBuiltIn::ExportDemuraFiles() {
   std::vector<std::string> configs = {"demura_config_", "demura_publickey_", "demura_signature_"};
 
   if (!panel_id_) {
-    DLOGE("Invalid panel id %llx", panel_id_);
+    DLOGE("Invalid panel id %lx", panel_id_);
     return kErrorUndefined;
   }
 
@@ -5824,7 +5824,7 @@ void DisplayBuiltIn::ClearDemuraMultiCfgParsers() {
   GenericPayload in;
 
   if (!pm_intf_ || !panel_id_) {
-    DLOGW("Invalid parser manager intf, panel id 0x%llx", panel_id_);
+    DLOGW("Invalid parser manager intf, panel id 0x%lx", panel_id_);
     return;
   }
 
@@ -5837,9 +5837,9 @@ void DisplayBuiltIn::ClearDemuraMultiCfgParsers() {
   panel_ids_info->panel_ids.push_back(panel_id_);
   ret = pm_intf_->SetParameter(kDemuraParserManagerReleaseMultiCfgParsers, in);
   if (ret) {
-    DLOGW("Failed to release DUC multi-config parsers for base panel_id 0x%llx", panel_id_);
+    DLOGW("Failed to release DUC multi-config parsers for base panel_id 0x%lx", panel_id_);
   } else {
-    DLOGI("Released DUC multi-config parsers for base panel_id 0x%llx successfully", panel_id_);
+    DLOGI("Released DUC multi-config parsers for base panel_id 0x%lx successfully", panel_id_);
   }
 }
 

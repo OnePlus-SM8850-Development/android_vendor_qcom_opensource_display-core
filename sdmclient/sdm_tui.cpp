@@ -138,7 +138,7 @@ DisplayError SDMTrustedUI::TUITransitionPrepare(int disp_id) {
 
   if (disp_id != qdutilsDisplayType::DISPLAY_PRIMARY &&
       disp_id != qdutilsDisplayType::DISPLAY_BUILTIN_2) {
-    DLOGE("Display %" PRIu64 " not supported", disp_id);
+    DLOGE("Display %" PRId32 " not supported", disp_id);
     return kErrorNotSupported;
   }
 

@@ -431,7 +431,7 @@ int IPCImpl::ProcessOps(IPCOps op, const GenericPayload &in,
 
 int IPCImpl::OnResponse(void *rsp_buf, size_t rsp_size) {
   if (rsp_size != sizeof(Response)) {
-    DLOGE("Mismatch in response size!! %d-%d", rsp_size, sizeof(Response));
+    DLOGE("Mismatch in response size!! %zu-%lu", rsp_size, sizeof(Response));
     return -EINVAL;
   }
   Response *rsp = reinterpret_cast<Response *>(rsp_buf);
