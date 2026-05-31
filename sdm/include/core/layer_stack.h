@@ -533,8 +533,8 @@ struct Layer {
   uint32_t demura_decimate_h = 1;                  //!< If demura layer, stores the decimation
                                                    //!< along height.
 
-  std::vector<PrivacyRegion> privacy_regions = {}; //!< Privacy regions of the layer
-  CornerRadius corner_radius = {};                 //!< Corner radius of the layer
+  static inline std::vector<PrivacyRegion> privacy_regions = {}; //!< Privacy regions of the layer
+  static inline CornerRadius corner_radius = {};                 //!< Corner radius of the layer
 };
 
 /*! @brief This structure defines the color space + transfer of a given layer.
