@@ -372,19 +372,6 @@ static inline vector<uint32_t> GetFpValues(const string &fp_list) {
   return dyn_fp_list;
 }
 
-static inline vector<uint32_t> GetAllowedModeSwitches(const string &mode_switch_lsit) {
-  stringstream line(mode_switch_lsit);
-  string mode_switch{};
-  vector<uint32_t> allowed_mode_switch_list{};
-
-  DRM_LOGI("Setting allowed mode switch list: %s", mode_switch_lsit.c_str());
-  while (line >> mode_switch) {
-    allowed_mode_switch_list.emplace_back(std::stoul(mode_switch));
-  }
-
-  return allowed_mode_switch_list;
-}
-
 void DRMConnectorManager::Update() {
   lock_guard<mutex> lock(lock_);
   drmModeRes *resource = drmModeGetResources(fd_);
@@ -952,8 +939,7 @@ void DRMConnector::ParseModeProperties(uint64_t blob_id, DRMConnectorInfo *info)
     } else if (line.find(mdp_transfer_time_us_max) != string::npos) {
       mode_item->transfer_time_us_max = std::stoi(string(line, mdp_transfer_time_us_max.length()));
     } else if (line.find(allowed_mode_switch) != string::npos) {
-      mode_item->allowed_mode_switch =
-          GetAllowedModeSwitches(string(line, allowed_mode_switch.length()));
+      mode_item->allowed_mode_switch = std::stoi(string(line, allowed_mode_switch.length()));
     } else if (line.find(panel_mode_caps) != string::npos) {
       if (!submode_item) {
         DRMSubModeInfo submode = {};

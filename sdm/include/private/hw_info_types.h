@@ -568,7 +568,7 @@ struct HWPanelInfo {
   uint32_t transfer_time_us = 0;      // transfer time in micro seconds to panel's active region
   uint32_t transfer_time_us_min = 0;  // min transfer time in micro seconds to panel's active region
   uint32_t transfer_time_us_max = 0;  // max transfer time in micro seconds to panel's active region
-  std::vector<uint32_t> allowed_mode_switch;   // Bit i represents switch to mode i allowed or not
+  uint32_t allowed_mode_switch = 0;   // Allowed mode switch bit mask
   uint32_t panel_mode_caps = 0;       // Video/Command mode capability bit mask
   bool qsync_support = false;         // Specifies panel supports qsync feature or not.
   bool dyn_bitclk_support = false;    // Bit clk can be updated to avoid RF interference.

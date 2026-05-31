@@ -278,7 +278,7 @@ struct DisplayConfigGroupInfo {
   float y_dpi = 0.0f;             //!< Dots per inch in Y-direction.
   bool is_yuv = false;            //!< If the display output is in YUV format.
   bool smart_panel = false;       //!< If the display config has smart panel.
-  std::vector<uint32_t> allowed_mode_switch;
+  uint64_t allowed_mode_switch = 0;
   uint32_t avr_step = 0;  //!< AVR Step fps of the display panel.
   bool fsc_panel = false;       //!< If the display panel is fsd panel
   uint32_t num_fsc_fields = 0;  //!< Panel's fsc fields if panel is fsc panel

@@ -1068,6 +1068,7 @@ struct DRMModeInfo {
   uint32_t transfer_time_us;
   uint32_t transfer_time_us_min;
   uint32_t transfer_time_us_max;
+  uint32_t allowed_mode_switch;
   uint32_t cur_panel_mode;
   uint32_t has_cwb_crop;
   uint32_t has_dedicated_cwb;
@@ -1077,7 +1078,6 @@ struct DRMModeInfo {
   uint32_t curr_compression_mode;
   DynamicFrontPorchType fp_type = UNKNOWN;
   std::vector<uint32_t> dyn_fp_list;
-  std::vector<uint32_t> allowed_mode_switch;
   std::vector<DRMSubModeInfo> sub_modes;
   uint32_t qsync_min_fps;
   uint32_t curr_bpp_mode;
